@@ -1,0 +1,5 @@
+ <div class="row pagination col-lg-12 cust-pagination" *ngIf="totalrecords>9">
+            <pagination previousText="&lsaquo;" nextText="&rsaquo;" [totalItems]="totalrecords"
+              (pageChanged)="pageChanged($event)" [boundaryLinks]="true" [itemsPerPage]="9" maxsize="5"></pagination>
+          </div>
+        </div>

@@ -1,0 +1,56 @@
+
+<div class="row" style="margin-left: 143px">
+   
+    <div class="col-md-6">
+        <h2>Item Detatils</h2> 
+       <form name="myForm"  >
+<div class="form-group">   
+        <label class="control-lable col-md-4" for="code" > Item Code:</label>
+        <div class="col-md-8">
+         <input type="text" name="code" id="code"   required  class="form-control">
+       </div> 
+         </div>
+<div class="form-group">
+            <label class="control-lable col-sm-2" for="name" >Item name:</label>
+            <div class="col-sm-8">
+                <select name="name" required id="name"   >
+                    <option value="">----Select---</option>
+                    <option value="12">dhsgdh</option>
+                    <option value="21">duygf<option>
+                    <option value="221">jhdgsuyg</option>
+                </select>
+              </div>
+        </div>
+        <div class="form-group">
+            <label class="control-lable col-sm-2" for="price" >Item Price:</label>
+            <div class="col-sm-8">
+           <input type="text" name="price" id="price" required  class="form-control"   >
+           
+           </div>
+           </div>
+   <div class="form-group">
+            <label class="control-lable col-md-4" for="quantity">Item Quantity:</label>
+            <div class="col-sm-8">
+          <input type="text" name="quantity" id="quantity"   required  class="form-control" >
+           </div>
+        </div>
+<div class="form-group">
+          <label class="control-lable col-sm-2" for="price">Item Image:</label>
+        <input type="file" name="urlpath"   />
+      </div>
+        <div class="form-group" style="margin-left: 29%;margin-top: 45px;">
+        <input type="button"  class="btn btn-success" style="margin-right: 100px;margin-left: 0px" value="Back">
+         <button type="submit" class="btn btn-success" >Submit</button>
+         <button type="button" class="btn btn-danger" style="margin-left: 82px;">Cancel</button>
+                </div>
+               </form>
+    </div>
+   <div class="col-md-6" >
+     <h1>debug</h1>
+     <pre>{{ myForm | json}}</pre>
+   </div>
+  </div>
+  
+  
+
+<router-outlet></router-outlet>

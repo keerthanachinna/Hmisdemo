@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-6" style="padding-left: 179px;width: 300px;height: 300px;">
+      
+        <div class="form-group">
+          Item Id:<label>{{it.id}}</label></div>
+        <div class="form-group">
+          Item code:<label>{{it.code}}</label></div>
+        <div class="form-group">Item name:<label>{{it.name}}</label></div>
+        <div class="form-group">Item price:<label>{{it.price}}</label></div>
+        <div class="form-group">Item quantity:<label>{{it.quantity}}</label></div>
+       
+    </div>
+    <div class="col-md-6" style= "width: 300px;height: 300px;">
+      <!-- <ng-template [ngIf]="urlpath != null">
+        <img [src]='urlpath' width="200px" height="200px">
+    </ng-template>  -->
+    <img src={{it.urlpath}} style= "width: 300px;height: 300px;"  />
+    </div>
+  
+  </div>
+  <div class="col-md-12"  style="padding-left: 179px" ><button type="submit" class="btn btn-success" (click)="clear()">Back</button></div>

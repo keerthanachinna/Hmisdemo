@@ -1,0 +1,82 @@
+<p>
+  checkvalidation works!
+</p>
+<form #renewalrptForm="ngForm"  style="margin-left: 143px">
+  <div class="container-body">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="page-title-box">
+          <h4 class="page-title">
+            <b>Periodical Coursewise Reports</b>
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="card m-b-30">
+      <div class="card-body">
+        <div class="form-group row">
+
+          <div class="col-md-2 required">
+            <label>From Year</label>
+          </div>
+          <div class="col-md-3">
+            <select id="fromyearid" class="form-control" tabindex="1" name="fromyearid" #fromyearid="ngModel" title="Please Select From year"
+              [(ngModel)]="renewalModel.fromyear" required (change)="fromyearchange($event)" [ngClass]="{
+                      'is-invalid': fromyearid.invalid && fromyearid.dirty, 
+                      'is-valid': fromyearid.valid && fromyearid.dirty
+                    }">
+              <option value="">-- Select --</option>
+              <option *ngFor="let d of Listofyears" [value]="d.fromyear">
+                {{d.fromyear}}
+              </option>
+            </select>
+            <div *ngIf="fromyearid.invalid && (fromyearid.dirty || fromyearid.touched)" style="color:red">
+              <div *ngIf="fromyearid.errors.required">
+                Please select From year
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-2 required">
+            <label>To Year</label>
+          </div>
+          <div class="col-md-3">
+            <select required class="form-control" tabindex="2" id="todate" name="todate" #todate="ngModel" title="Please Select To year"
+              [(ngModel)]="renewalModel.toyear" required (change)="toyearchange($event)" [ngClass]="{
+                'is-invalid': todate.invalid && todate.dirty, 
+                'is-valid': todate.valid && todate.dirty }">
+              <option value="">-- Select --</option>
+              <option *ngFor="let d of InstitutionList" [value]="d.toyear">
+                {{d.toyear}}
+              </option>
+            </select>
+            <div *ngIf="todate.invalid && (todate.dirty || todate.touched)" style="color:red">
+              <div *ngIf="todate.errors.required">
+                Please select To year
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-5">
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-sm btn-success" title="Submit" (click)="getreports()"> Submit
+            </button>
+          </div>
+        </div>
+        <hr>
+        <object id="testObj" name="test_pdf" type="application/pdf" style="width:100%; height: 500px"></object>
+      </div>
+    </div>
+  </div>
+  <style>
+    span:hover {
+      cursor: pointer;
+    }
+  </style>
+</form>

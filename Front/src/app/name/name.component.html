@@ -1,0 +1,55 @@
+
+<div class="container">
+<div class="row">
+    <div class="col-md-8">
+            <div class="form-group">
+                    <label>Add  item name here:</label>
+                <input type="text" name="brandname" #brandnameRef="ngModel" pattern="^[a-zA-Z]*$"  placeholder="enter brand name" required class="form-control" [(ngModel)]="brand.brandname">
+                <div *ngIf="brandnameRef.errors && (brandnameRef.dirty || brandnameRef.touched)" class="alert alert-danger">
+<div [hidden]="!brandpriceRef.errors.required">
+            please enter a name 
+                      </div> 
+                     <div [hidden]="!brandpriceRef.errors.minlength">
+                    please enter a atleast 4 character 
+                    </div> 
+                     <div [hidden]="!brandpriceRef.errors.pattern">
+                       please enter only character 
+                           </div> 
+                             </div>
+                             </div>
+                <div class="form-group">
+                    <label>Add  item  one quanity price:</label>
+                <input type="text" name="brandprice" #brandpriceRef="ngModel" pattern="^[0-9]*$"  placeholder="enter brand one quantity price" required class="form-control" [(ngModel)]="brand.brandprice">
+                <div *ngIf="brandpriceRef.errors && (brandpriceRef.dirty || brandpriceRef.touched)" class="alert alert-danger">
+ <div [hidden]="!brandpriceRef.errors.required">
+                       please enter a number
+                       </div> 
+                      
+ <div [hidden]="!brandnameRef.errors.pattern">
+                      please enter only number
+                            </div> 
+                              </div>
+                <button type="submit" class="btn btn-success" (click)="shows(brand)">Submit</button>
+                <button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>
+    </div>
+</div>
+<div></div>
+</div>
+</div>
+<div id="footer" >
+    This will be printed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a quam at nibh adipiscing interdum. Nulla vitae accumsan ante. 
+    <p>
+    ryhdthu
+    </p>
+</div>
+<div>
+This will not be printed.
+</div>
+
+<div id="anotherdiv">
+Nor will this.
+</div>
+<div class="col-md-8" style="text-align: center">
+<input type="button" value="PrintDiv" (click)="PrintElem('#footer')" />
+<input type="button" value="PrintDiv1" (click)="PrintElem('#footer')" />
+</div>

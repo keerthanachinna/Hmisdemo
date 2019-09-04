@@ -1,0 +1,133 @@
+
+
+
+<div class="row" style="margin-left: 143px">
+
+  
+    <div class="col-md-6">
+        <h1>Billing </h1>  
+      <form name="myFormbill" id=renewalrptForm  #renewalrptForm="ngForm">
+          <div class="form-group">
+              <label class="control-lable col-sm-2" for="name" >Item name:</label>
+              <div class="col-sm-8">
+                  <select name="billid"  id="billid" #billidRef="ngModel"  required  (change)="onChangenameid($event.target.value)" class="form-control" [(ngModel)]="billingModel.billid"
+                  [ngClass]="{
+                    'is-invalid': billidRef.invalid && billidRef.dirty, 
+                    'is-valid': billidRef.valid && billidRef.dirty
+                  }"
+                   >
+                   
+                   <option value="">----Select---</option>
+                      <option *ngFor=" let itemid of billiddemo" [value]="itemid.id">{{itemid.id}}</option>
+                  </select>
+                  <div *ngIf="billidRef.invalid && (billidRef.dirty || billidRef.touched)" style="color:red">
+                      <div [hidden]="!(billidRef.errors.pattern ||billidRef.errors.required )" class="alert alert-danger">
+                          please select id
+                      </div>
+                    </div>
+          </div>
+          </div>
+        <div class="form-group" class="form-horizontal">   
+        <label class="control-lable col-md-4" for="bcode" > Item Code:</label>
+        <div class="col-md-8">
+         <input type="text" name="bcode" id="bcode" #bcodeRef="ngModel" pattern="^[1-9][0-9]{2}$" required  class="form-control" [(ngModel)]="billingModel.bcode"
+         [ngClass]="{
+          'is-invalid': bcodeRef.invalid && bcodeRef.dirty, 
+          'is-valid': bcodeRef.valid && bcodeRef.dirty
+        }"
+         >
+         <div *ngIf="bcodeRef.invalid && (bcodeRef.dirty || bcodeRef.touched)" style="color:red">
+            <div [hidden]="!(bcodeRef.errors.pattern ||bcodeRef.errors.required )" class="alert alert-danger">
+                please slect name
+            </div>
+          </div>
+
+
+        </div> 
+         </div>
+         
+            <div class="form-group">
+                <label class="control-lable col-sm-2" for="name" >Item name:</label>
+                <div class="col-sm-8">
+                    <select name="name"  id="name" #nameRef="ngModel"  required (change)="onChangename($event.target.value)" class="form-control" [(ngModel)]="billingModel.bname"
+                    [ngClass]="{
+                      'is-invalid': nameRef.invalid && nameRef.dirty, 
+                      'is-valid': nameRef.valid && nameRef.dirty
+                    }"
+                    
+                    >
+                    <option value="">----Select---</option>
+                        <option *ngFor=" let name of nameList" [value]="name.id">{{name.brandname}}</option>
+                    </select>
+                    <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)" style="color:red">
+                        <div [hidden]="!(nameRef.errors.pattern ||nameRef.errors.required )" class="alert alert-danger">
+                            please slect name
+                        </div>
+                      </div>
+            </div>
+            </div>
+       
+         <div class="form-group">
+          <label class="control-lable col-sm-2" for="bprice" >Item Price:</label>
+          <div class="col-sm-8">
+         <input type="text" name="bprice"  id="bprice" #bpriceRef="ngModel"  required  pattern="^[0-9]*$" class="form-control" [(ngModel)]="billingModel.bprice"
+         [ngClass]="{
+          'is-invalid': bpriceRef.invalid && bpriceRef.dirty, 
+          'is-valid': bpriceRef.valid && bpriceRef.dirty
+        }"
+         
+         >
+         <div *ngIf="bpriceRef.invalid && (bpriceRef.dirty || bpriceRef.touched)" style="color:red">
+            <div [hidden]="!(bpriceRef.errors.pattern ||bpriceRef.errors.required )" class="alert alert-danger">
+                please enter the number
+            </div>
+          </div>
+
+
+         </div>
+         </div>
+          <div class="form-group">
+            <label class="control-lable col-md-4" for="bquantity">Item Quantity:</label>
+            <div class="col-sm-8">
+          <input type="text" name="bquantity" id="bquantity" #bquantityRef="ngModel" pattern="^[0-9]*$"  required     class="form-control" [(ngModel)]="billingModel.bquantity"
+          [ngClass]="{
+            'is-invalid': bquantityRef.invalid && bquantityRef.dirty, 
+            'is-valid': bquantityRef.valid && bquantityRef.dirty
+          }"
+          >
+          <div *ngIf="bquantityRef.invalid && (bquantityRef.dirty || bquantityRef.touched)" style="color:red">
+              <div [hidden]="!(bquantityRef.errors.pattern ||bquantityRef.errors.required )" class="alert alert-danger">
+                  please enter the number
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-lable col-md-4" for="sale">Item sale:</label>
+          <div class="col-sm-8">
+        <input type="text" name="sale" id="sale" #saleRef="ngModel"  required   class="form-control" [(ngModel)]="billingModel.sale"
+        
+        [ngClass]="{
+          'is-invalid': saleRef.invalid && saleRef.dirty, 
+          'is-valid': saleRef.valid && saleRef.dirty
+        }"
+        
+        >
+        <div *ngIf="saleRef.invalid && (saleRef.dirty || saleRef.touched)" style="color:red">
+            <div [hidden]="!(saleRef.errors.pattern ||saleRef.errors.required )" class="alert alert-danger">
+                please enter SALE OR NOT
+            </div>
+          </div>
+        </div>
+      </div>
+         <div class="form-group" style="margin-left: 29%;margin-top: 45px;">
+      <input type="button"  class="btn btn-success" style="margin-right: 100px;margin-left: 0px" value="Back" routerLink="/billc" routerLinkActive="active">
+           
+         <button type="submit" class="btn btn-success" (click)="editt(billingModel)">Submit</button>
+         <button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>
+                </div>
+      </form>
+    </div>
+  </div>
+  

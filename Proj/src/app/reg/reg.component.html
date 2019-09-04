@@ -1,0 +1,32 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Registation from</h1>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6">
+ <form>
+        
+        <div class="form-group">   
+ Name: <input type="text" name="name" class="form-control" [(ngModel)]="reg.name"> 
+</div>
+ <div class="form-group">
+ Email id: <input type="text" name="email" class="form-control" [(ngModel)]="reg.email">
+ </div>
+<div class="form-group">
+Password : <input type="text" name="password" class="form-control" [(ngModel)]="reg.password">
+</div>
+ <div class="form-group">
+ Phone Number:<input type="text" name="phone" class="form-control" [(ngModel)]="reg.phone">
+ </div>
+<div class="form-group" style="margin-left: 29%;margin-top: 45px;">
+<button type="submit" class="btn btn-success" (click)="show(reg)">Submit</button>
+<button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>
+</div>
+
+                  
+              
+          </form>
+        </div>
+    </div>

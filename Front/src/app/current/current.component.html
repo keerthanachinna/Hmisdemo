@@ -1,0 +1,32 @@
+
+<div class="row" style="margin-left: 143px">
+<div class="col-md-4">
+    Enter the name :<select name="name" (change)="onChangename($event.target.value)" class="form-control" [(ngModel)]="name"  >
+    <option value="null">Select</option>
+    <option *ngFor=" let name of nameList" [value]="name.id">{{name.brandname}}</option>
+</select><button type="submit" class="btn btn-success" (click)="currentname(name)">click</button>
+</div>
+<div class="col-md-8">
+    <table class="table table-striped table-bordered table-sm row-border hover" >
+        <thead>
+          <tr>
+              <th>Item Id </th>
+            <th>Item code </th>
+            <th> Item name</th>
+            <th>Item Price</th>
+            <th>Item Quantity</th>
+           
+        </thead>
+        <tbody>
+            <tr *ngFor="let it of item">
+            <td>{{it.id}}</td>
+               <td>{{it.code}}</td>
+               <td>{{it.name}}</td>
+               <td>{{it.price}}</td>
+               <td>{{it.quantity}}</td>
+               
+           </tr>
+        </tbody>
+      </table>
+</div>
+</div>

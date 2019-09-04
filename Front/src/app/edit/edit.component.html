@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-md-6" style="margin-left: 143px">
+        <h2>Item Detatils</h2>  
+      <form name="myfrom" id=renewalrptForm  #renewalrptForm="ngForm">
+  
+        <div class="form-group" >   
+            <label class="control-lable col-md-4" for="code" > Item Code:</label>
+            <div class="col-md-8">
+             <input type="text" name="code" #codeRef="ngModel" pattern="^[1-9][0-9]{2}$"  required  class="form-control" [(ngModel)]="item.code" />
+            
+             <div *ngIf="codeRef.errors && (codeRef.dirty || codeRef.touched )" class="alert alert-danger">
+               
+                <div [hidden]="!codeRef.errors.pattern">
+                
+                    please enter a 3 digit number
+                      
+            </div>
+           
+                    
+            </div>
+          </div> 
+             </div>
+  
+         <div class="form-group">
+            <label class="control-lable col-sm-2" for="name" >Item name:</label>
+            <div class="col-sm-8" *ngIf="item != null">
+                <select name="name" #nameRef="ngModel" required id="name" (change)="onChangename($event.target.value)" class="form-control" [(ngModel)]="item.name"
+                [ngClass]="{
+                  'is-invalid': nameRef.invalid && nameRef.dirty, 
+                  'is-valid': nameRef.valid && nameRef.dirty
+                }">
+              <option value="">select</option>
+                    <option *ngFor=" let name of nameList" [value]="name.id">{{name.brandname}}</option>
+                </select>
+                <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)" style="color:red">
+                    <div [hidden]="!(nameRef.errors.pattern ||nameRef.errors.required)" class="alert alert-danger">
+                        please enter the number
+                    </div>
+                    
+                     
+                  </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <label class="control-lable col-sm-2" for="price" >Item Price:</label>
+          <div class="col-sm-8">
+        
+            <input type="text" name="price"   #priceRef="ngModel" pattern="^[0-9]*$"  required class="form-control" [(ngModel)]="item.price">
+            <div *ngIf="priceRef.errors && (priceRef.dirty || priceRef.touched )" class="alert alert-danger">
+               
+                <div [hidden]="!priceRef.errors.pattern">
+                
+                    please enter the digit only.
+                      
+            </div>
+           
+                    
+            </div>
+         </div>
+         </div>
+  
+          <div class="form-group">
+            <label class="control-lable col-md-4" for="quantity">Item Quantity:</label>
+            <div class="col-sm-8">
+          <input type="text" name="quantity"    #quantityRef="ngModel" pattern="^[0-9]*$"  required class="form-control" [(ngModel)]="item.quantity">
+          <div *ngIf="quantityRef.errors && (quantityRef.dirty || quantityRef.touched )" class="alert alert-danger">
+               
+              <div [hidden]="!quantityRef.errors.pattern">
+              
+                  please enter the digit only.
+                    
+          </div>
+         
+                  
+          </div>
+          </div>
+        </div>
+  
+      
+        
+     
+        <div class="form-group">
+          <label class="control-lable col-sm-12" for="price">Item Image:</label>
+          
+         <input type="file" title="your text" name="urlpath" #urlpath="ngModel" (onchange)="getFileDetails($event)" [(ngModel)]="item.myfiles">
+         
+        <img src={{item.urlpath}} style= "width: 100px;height: 100px;"   />
+        </div>
+      
+         
+       
+  
+       
+         
+         <div class="form-group" style="margin-left: 29%;margin-top: 45px;">
+         <button type="submit" class="btn btn-success" (click)="edit(item)">Submit</button>
+         <button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>
+                </div>
+               
+      </form>
+    </div>
+  </div>
+  

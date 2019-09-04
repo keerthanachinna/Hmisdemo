@@ -1,0 +1,22 @@
+<div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+   </h1>
+   </div>
+  
+  <div class="login">
+      <div class="form-group">
+  
+    <input type="text" placeholder="Username" id="username" class="form-control"  ng-Model="login.username" required="" autocomplete="off"   autofocus />  
+    </div>
+    <div class="form-group">
+       
+  <input type="password" placeholder="password" id="password" class="form-control"  ng-Model="login.password" required="">  
+  
+  </div>
+  <button type="button" id="btnforgot"  class="forgot" ng-click="login.forgotpassword()" style="padding:0px;background:none;border:none;color: #1b72e2;">Forgot
+    Password</button>
+  
+  <input type="submit" value="Sign In" ng-click="sing(login)" [disabled]="renewalrptForm.invalid">
+  </div>
+  <div class="shadow"></div>

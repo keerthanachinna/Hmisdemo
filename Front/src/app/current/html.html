@@ -1,0 +1,28 @@
+
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+          <!--category section left side-->
+          <div class="leftcategory-sec left-cate">
+            <h4><i class="fa fa-list-ul m-r-5"></i>Product Category</h4>
+            <accordion class="catclswomen">
+              <div class="inner-cont" *ngFor="let womencat of categoryData; let i = index">
+                <accordion-group heading="{{womencat.name}}" #womencatparent [isOpen]='false' class="fa"
+                  [ngClass]="!womencatparent?.isOpen ? 'fa-plus': 'fa-minus'">
+                  <div class="innercnt" *ngFor="let wmncat of womencat.subMenu">
+                    <accordion-group class="mensubcat" heading="{{wmncat.name}}" (click)="togglewomencat(i)"
+                      [ngClass]="{'fa':true,'fa-minus':togglemen[i],'fa-plus':!togglemen[i],'wmncatSubMenu':wmncat.products.length === 1}">
+                      <div class="innercnt" *ngFor="let product of wmncat.products">
+                        <ul>
+                          <li><span (click)="showProducts(product.id);">{{product.name}}</span></li>
+                        </ul>
+                      </div>
+                    </accordion-group>
+                    <!-- <ul><li><span (click)="showProducts(wmncat.id);">{{wmncat.name}}</span></li></ul> -->
+                  </div>
+                </accordion-group>
+              </div>
+            </accordion>
+          </div>
+          <!--category section right side-->
+        </div>
+      </div>
+    </section>

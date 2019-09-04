@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+    .md-country .mbsc-lv-img {
+        margin-top: -.6em;
+        width: 2em;
+    }
+    
+    .md-continent {
+        font-size: 36px;
+        position: absolute;
+        height: 1em;
+        width: 1em;
+        top: 50%;
+        margin-top: -.5em;
+        left: .42em;
+        text-align: center;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }

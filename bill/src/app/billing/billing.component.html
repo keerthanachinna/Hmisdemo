@@ -1,0 +1,58 @@
+
+
+
+<div class="row">
+
+  
+    <div class="col-md-6">
+        <h1>Billing </h1>  
+      <form>
+          <div class="form-group" class="form-horizontal">   
+              <label class="control-lable col-md-4" for="billid" > Item id:</label>
+              <div class="col-md-8">
+               <input type="text" name="billid" class="form-control" [(ngModel)]="bill.billid">
+              </div> 
+               </div>
+        <div class="form-group" class="form-horizontal">   
+        <label class="control-lable col-md-4" for="bcode" > Item Code:</label>
+        <div class="col-md-8">
+         <input type="text" name="bcode" class="form-control" [(ngModel)]="bill.bcode">
+        </div> 
+         </div>
+         
+            <div class="form-group">
+                <label class="control-lable col-sm-2" for="name" >Item name:</label>
+                <div class="col-sm-8">
+                    <select name="name" (change)="onChangename($event.target.value)" class="form-control" [(ngModel)]="bill.bname">
+                        <option value="null">Select</option>
+                        <option *ngFor=" let name of nameList" [value]="name.id">{{name.brandname}}</option>
+                    </select>
+            </div>
+            </div>
+       
+         <div class="form-group">
+          <label class="control-lable col-sm-2" for="bprice" >Item Price:</label>
+          <div class="col-sm-8">
+         <input type="text" name="bprice" class="form-control" [(ngModel)]="bill.bprice">
+         </div>
+         </div>
+          <div class="form-group">
+            <label class="control-lable col-md-4" for="bquantity">Item Quantity:</label>
+            <div class="col-sm-8">
+          <input type="text" name="bquantity" class="form-control" [(ngModel)]="bill.bquantity">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-lable col-md-4" for="sale">Item sale:</label>
+          <div class="col-sm-8">
+        <input type="text" name="sale" class="form-control" [(ngModel)]="bill.sale">
+        </div>
+      </div>
+         <div class="form-group" style="margin-left: 29%;margin-top: 45px;">
+         <button type="submit" class="btn btn-success" (click)="show(bill)">Submit</button>
+         <button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>
+                </div>
+      </form>
+    </div>
+  </div>
+  

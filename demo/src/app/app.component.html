@@ -1,0 +1,40 @@
+<mbsc-page >
+    <mbsc-form>
+        <mbsc-form-group>
+            <mbsc-form-group-title>Hierarchical listview</mbsc-form-group-title>
+            <mbsc-listview [options]="listviewSettings">
+                <mbsc-listview-item *ngFor="let conti of data">
+                    <span class="{{conti.cl}}"> </span> {{conti.name}}
+                    <mbsc-listview-sublist>
+                        <mbsc-listview-item *ngFor="let country of conti.children">
+                            <img [src]="country.imgsrc" /> {{country.name}}
+                            <mbsc-listview-sublist>
+                                <mbsc-listview-item *ngFor="let city of country.children">
+                                    {{city.name}}
+                                </mbsc-listview-item>
+                            </mbsc-listview-sublist>
+                        </mbsc-listview-item>
+                    </mbsc-listview-sublist>
+                </mbsc-listview-item>
+            </mbsc-listview>
+        </mbsc-form-group>
+        <div class="mbsc-padding">The listview can also be rendered inside a card</div>
+        <mbsc-card>
+            <mbsc-listview [options]="insideCardSettings">
+                <mbsc-listview-item *ngFor="let conti of data">
+                    <span class="{{conti.cl}}"> </span> {{conti.name}}
+                    <mbsc-listview-sublist>
+                        <mbsc-listview-item *ngFor="let country of conti.children">
+                            <img [src]="country.imgsrc" /> {{country.name}}
+                            <mbsc-listview-sublist>
+                                <mbsc-listview-item *ngFor="let city of country.children">
+                                    {{city.name}}
+                                </mbsc-listview-item>
+                            </mbsc-listview-sublist>
+                        </mbsc-listview-item>
+                    </mbsc-listview-sublist>
+                </mbsc-listview-item>
+            </mbsc-listview>
+        </mbsc-card>
+    </mbsc-form>
+</mbsc-page>

@@ -1,0 +1,840 @@
+import {
+  Component,
+  OnInit,
+  HostListener,
+  OnDestroy,
+  ChangeDetectorRef
+} from "@angular/core";
+import {NgxCarousel} from "ngx-carousel";
+import {NgxCarouselModule} from "ngx-carousel";
+import {SharedService} from "../../shared.service";
+import {GeneralService} from "../../general.service";
+import {Router, ActivatedRoute, Params} from "@angular/router";
+import {ToastsManager} from "ng2-toastr";
+import {ISubscription} from "rxjs/Subscription";
+import * as _ from "lodash";
+import { ImageZoom } from "../../../../node_modules/angular2-image-zoom";
+import { UtilsService } from "../../shared/utils";
+import { Title } from "@angular/platform-browser";
+
+
+
+@Component({
+  selector: "app-product-details",
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.css'],
+  providers: [NgxCarousel]
+})
+export class ProductDetailsComponent implements OnInit, OnDestroy {
+  private subscription: ISubscription;
+  private subscriptionnew: ISubscription;
+  private ImageZoom: ImageZoom;
+
+  currencyRate: any;
+  private subscriptionCurrency: ISubscription;
+  dislikeCount = 0;
+  likeCount = 0;
+  showAvailableError = false;
+  showReviewSubmit = false;
+  disableRating = false;
+  quantity1: any;
+  activecircle: any;
+  public checkwishlist: any;
+  activeImg: any = 0;
+  cuurentwishlist: any = {};
+  tempProdList: any = {};
+  currentColor: any;
+  final: any = [];
+  sizearray: any = [];
+  finalarray: any = [];
+  uniquedata: any = [];
+  quantity: any;
+  size: any = [];
+  customerRating: any = '';
+  useridData: string;
+  userId: any;
+  reviews: any = [];
+  similarproduct: any = [];
+  proddetaillist: any = {};
+  sizeOption: any;
+  public selectedItem = true;
+  selectedImg =  this.proddetaillist.imageURI + this.activeImg;
+  item: any;
+  src = '../../assets/img/product/pdoduct2.png';
+  src1 = '../../assets/img/product/pdoduct3.png';
+  src2 = '../../assets/img/common/model/1.png';
+  imgsrc = '../../assets/img/product/product1.jpg';
+  proddetail: any;
+  product: any;
+
+  url: any;
+  
+
+  rating: any;
+
+  id = '';
+  reviewTitle = '';
+  reviewDesc = '';
+  public data = 1;
+  showError = false;
+  public carouselItems: Array<any>;
+
+  mainMenuId: any;
+  menuId: any;
+  breadCrumbDetailsValue: any = {};
+  mainCategory: any;
+  button_disable = true;
+
+  showError1 = false;
+  showError2 = false;
+  oldPrice: any;
+  newPrice: any;
+  occassionName: any;
+  materialName: any;
+  workName: any;
+  statusErrorCode: any;
+  categoryData: any;
+  womencategory: any;
+  errorReview = false;
+  selfReviewed: boolean = true;
+  activeStatusTrue: boolean;
+  constructor(
+    public carouselTile: NgxCarousel,
+    private route: ActivatedRoute,
+    private router1: Router,
+    private ss: SharedService,
+    private generalService: GeneralService,
+    private toastr: ToastsManager,
+    private cdRef: ChangeDetectorRef,
+    private utils: UtilsService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Shop');
+  }
+  public items: Array<string> = ['Most Helpful', 'This Week', 'Last month', ''];
+  max = 5;
+  rate = 0;
+  isReadonly = false;
+  addCardLoad = false;
+  div_disable = true;
+  togglewomen = [false];
+  togglemen = [false];
+
+  ngOnInit() {
+    //this.getsimalrproduct1();
+    this.ss.$senduserInfoData.subscribe(res => {
+      this.useridData = res;
+    });
+    this.useridData = this.generalService.getUserId();
+    this.route.params.subscribe((params: Params) => {
+      this.userId = params['id'];
+    });
+    this.subscriptionCurrency = this.ss.currency$.subscribe(res => {
+      this.currencyRate = res;
+    });
+    this.getproductsdetail1();
+   // this.getsimalrproduct1();
+    this.carouselItems = [
+      {
+        src: '/assets/img/product/4.png',
+        src2: '/assets/img/product/similar.svg',
+        title: 'Parampara Silks',
+        amount: 'Rs. 2500',
+        amount1: 'Rs. 25,000',
+        off: '50% OFF',
+        cart: 'Add to Cart',
+        buy: 'Buy Now'
+      },
+      {
+        src: '/assets/img/product/4.png',
+        src2: '/assets/img/product/similar.svg',
+        title: 'Parampara Silks',
+        amount: 'Rs. 2500',
+        amount1: 'Rs. 25,000',
+        off: '50% OFF',
+        cart: 'Add to Cart',
+        buy: 'Buy Now'
+      },
+      {
+        src: '/assets/img/product/4.png',
+        src2: '/assets/img/product/similar.svg',
+        title: 'Parampara Silks',
+        amount: 'Rs. 2500',
+        amount1: 'Rs. 25,000',
+        off: '50% OFF',
+        cart: 'Add to Cart',
+        buy: 'Buy Now'
+      },
+      {
+        src: '/assets/img/product/4.png',
+        src2: '/assets/img/product/similar.svg',
+        title: 'Parampara Silks',
+        amount: 'Rs. 2500',
+        amount1: 'Rs. 25,000',
+        off: '50% OFF',
+        cart: 'Add to Cart',
+        buy: 'Buy Now'
+      }
+    ];
+
+    this.carouselTile = {
+      grid: {xs: 2, sm: 2, md: 3, lg: 3, all: 0},
+      slide: 1,
+      point: {
+        visible: false
+      },
+      load: 2,
+      touch: true,
+      easing: 'ease'
+    };
+
+    const accordian = document.getElementsByClassName('accordion');
+        let i;
+        for (i = 0; i < accordian.length; i++) {
+            accordian[i].addEventListener('click', function () {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.display === 'block') {
+                    panel.style.display = 'none';
+                } else {
+                    panel.style.display = 'block';
+                }
+            });
+        }
+    this.getcategoryList();
+  //  this.breadCrumbDetails();
+  }
+  ngOnDestroy() {
+    // this.subscription.unsubscribe();
+    // this.subscriptionnew.unsubscribe();
+    this.subscriptionCurrency.unsubscribe();
+  }
+  confirmSelection(event: KeyboardEvent) {
+    if (this.rate === 0 || this.reviewDesc === '') {
+      this.disableRating = false;
+    } else {
+      this.disableRating = true;
+    }
+    if (event.keyCode === 13) {
+      this.isReadonly = true;
+    }
+  }
+
+
+  togglewomencat(arg){
+    this.togglewomen[arg] = !this.togglewomen[arg];
+}
+togglemencat(arg){
+    this.togglemen[arg] = !this.togglemen[arg];
+}
+
+  resetStars() {
+    this.rate = 0;
+    this.isReadonly = false;
+  }
+  checkAvailability() {
+    this.showAvailableError = false;
+    if (this.data > this.quantity1) {
+      this.showAvailableError = true;
+      setTimeout(() => {
+        this.data = this.quantity1;
+      }, 0);
+      return false;
+    }
+    if (this.data == null) {
+      setTimeout(() => {
+        this.data = 1;
+      }, 0);
+    }
+    return true;
+  }
+  increaseValue() {
+    if (!this.checkAvailability()) {
+      return;
+    }
+    if (this.quantity1 == 0) {
+      return;
+    }
+    this.data = parseInt(this.data + '', 10) + 1;
+    if (this.data > this.quantity) {
+      this.data = this.quantity;
+    }
+
+  }
+  decreaseValue() {
+    this.showAvailableError = false;
+    if (this.data > 1) {
+      this.data = this.data - 1;
+
+    }
+  }
+  addcart(item) {
+    this.router1.navigate(['product/add-to-cart']);
+  }
+  public imageClick(src, i) {
+    this.activeImg = i;
+    this.selectedImg = this.proddetaillist.imageURI + src;
+  }
+
+  public getproductsdetail1() {
+    this.finalarray = [];
+    this.sizearray = [];
+    // this.quantityArray = [];
+    this.ss.showLoading(true);
+    const userdata = {
+      productVarietyId: this.userId,
+      userId: this.generalService.getUserId()
+    };
+    this.generalService.postRequest('ProductDetail', userdata).subscribe(
+      res => {
+        this.ss.showLoading(false);
+        this.proddetaillist = res.responseContent;    
+        
+      //  this.proddetaillist.productDetailVarietyResponseDtos.sort(this.utils.dynamicSort("colorId"));
+        this.tempProdList = res.responseContent;
+        this.mainMenuId = res.responseContent.mainMenuId;
+        
+        this.breadCrumbDetails();
+        this.getWishlist();
+        this.customerRating = Math.round(
+          this.proddetaillist.productDetailVarietyResponseDtos[0].rating
+        );
+
+        this.quantity = this.proddetaillist.productDetailVarietyResponseDtos[0].quantity;
+        
+        this.oldPrice = this.proddetaillist.productDetailVarietyResponseDtos[0].oldPrice;
+        this.newPrice = this.proddetaillist.productDetailVarietyResponseDtos[0].newPrice;
+        this.occassionName = this.proddetaillist.productDetailVarietyResponseDtos[0].occassionName;
+        this.workName = this.proddetaillist.productDetailVarietyResponseDtos[0].workName;
+        this.materialName = this.proddetaillist.productDetailVarietyResponseDtos[0].materialName;
+
+        this.uniquedata = _.uniqBy(
+          this.proddetaillist.productDetailVarietyResponseDtos,
+          'color'
+        );
+      
+        if(this.uniquedata.length != 1){
+            this.div_disable = true;
+        }else{
+          this.div_disable = false;
+        }
+        
+        for (let j = 0; j < this.uniquedata.length; j++) {
+          this.sizearray = [];
+          for (
+            let i = 0;
+            i < this.proddetaillist.productDetailVarietyResponseDtos.length;
+            i++
+          ) {
+            if (
+              this.proddetaillist.productDetailVarietyResponseDtos[i].color ===
+              this.uniquedata[j].color
+            ) {
+              const size = this.proddetaillist.productDetailVarietyResponseDtos[i].size;
+              if (size != null) {
+                this.sizearray.push(size);
+              }
+            }
+          }
+          this.finalarray.push({
+            color: this.uniquedata[j].color,
+            size: this.sizearray,
+            rating: this.uniquedata[j].rating, 
+            quantity: this.uniquedata[j].quantity,
+            oldPrice: this.uniquedata[j].oldPrice,
+            materialName: this.uniquedata[j].materialName,
+            workName: this.uniquedata[j].workName,
+            occassionName: this.uniquedata[j].occassionName,
+            newPrice: this.uniquedata[j].newPrice,
+            smallImage: this.uniquedata[j].smallImage,
+            mediumImage: this.uniquedata[j].mediumImage,
+            thumbnailImage: this.uniquedata[j].thumbnailImage
+          });
+        }
+        this.getprodcategory(this.finalarray[0]);
+        this.activecircle = this.finalarray[0].color;
+        
+        this.cuurentwishlist = this.proddetaillist.productDetailVarietyResponseDtos[0];
+
+        this.src = this.cuurentwishlist.smallImage;
+        this.src1 = this.cuurentwishlist.mediumImage;
+        this.src2 = this.cuurentwishlist.thumbnailImage;
+        this.selectedImg = this.proddetaillist.imageURI + this.src;
+
+        this.size = this.finalarray[0].size;
+        this.selectedItem = this.size[0];
+        this.currentColor = this.finalarray[0].color;
+        
+        this.getreview();
+        this.getsimalrproduct1();
+      },
+      e => {
+        this.ss.showLoading(false);
+      },
+      () => {}
+    );
+  }
+  getsimilarDetail(id) {
+   // this.userId = data;
+    
+    this.ss.showLoading(false);
+    this.router1.navigate(['/product/details', id]);
+    this.getproductsdetail1();
+  }
+
+  public getsimalrproduct1() {
+    this.ss.showLoading(true);
+    const userData = {
+      productvarietyId: this.proddetaillist['productId'],
+      userId: this.generalService.getUserId()
+    };
+    
+    this.generalService
+      .postRequest('GetProductDetail/similarProducts', userData)
+      .subscribe(
+      res => {
+        this.similarproduct = res.responseContent;
+        this.ss.showLoading(false);
+        
+      },
+      e => {
+        this.ss.showLoading(false);
+      },
+      () => {}
+      );
+  }
+  public getreview() {
+ 
+    this.generalService
+      .getRequest1('productReview?id='+ this.proddetaillist['productId'] +'&loginUserId='+this.useridData)
+      .subscribe(
+      res => {
+        this.reviews = res.responseContents;
+        if(this.selfReviewed == true){
+          return true;
+        }else{
+          return false;
+        }
+      },
+      e => {},
+      () => {
+      }
+      );
+  }
+
+  // validateuser() {
+  //   const reviewdata = {
+  //     username: 'hosuper1',
+  //     password: 'user1'
+  //   };
+  //   this.generalService
+  //     .postRequest('login/validateuser', reviewdata)
+  //     .subscribe(res => {}, e => {}, () => {});
+  // }
+  viewPage() {
+    this.router1.navigate(['/product/review', this.proddetaillist['productId']]);
+    this.getreview();
+  }
+  public submitReview() {
+    if (this.rate === 0 && this.reviewDesc === '') {
+      this.showError = true;
+      this.showError1 = false;
+      this.showError2 = false;
+      return false;
+    } 
+    if (this.rate !== 0 && this.reviewDesc === '') { 
+      this.showError1 = true;
+      this.showError = false;
+      this.showError2 = false;
+      return false;
+    } 
+    if (this.rate === 0 && this.reviewDesc !== '') { 
+      this.showError2 = true;
+      this.showError = false;
+      this.showError1 = false;
+      return false;
+    } 
+    this.showError = false;
+    this.showReviewSubmit = true;
+    const reviewdata = {
+      review: this.reviewDesc,
+      rating: this.rate,
+      productId: this.proddetaillist['productId'],
+      userId: this.useridData
+    };
+    this.generalService.postRequest1('postReview', reviewdata).subscribe(
+      res => {
+        // this.toastr.success('added Successfull');
+        
+        if (res.statusCode == 0) {
+
+          this.getreview();
+        }
+        if (res.statusCode == 1) {
+          this.statusErrorCode = res.errorDescription;
+         // this.errorReview = true;
+          this.toastr.error(res.errorDescription);
+        }
+        this.reviewDesc = '';
+        this.rate = 0;
+        this.showReviewSubmit = false;
+      },
+      e => {
+        this.showReviewSubmit = false;
+        // this.toastr.error('added failed');
+      },
+      () => {}
+    );
+  }
+  likes(x) {
+    const userData = {
+      reviewid: x.reviewId,
+      userid: this.generalService.getUserId(),
+      liketype: true
+    };
+  
+    this.generalService.postRequest1('postReviewLike', userData).subscribe(
+      res => {
+        if (res.statusCode === 0) {
+          x.likeCount = x.likeCount + 1;
+            this.likeCount++;
+          if (x.dislikeCount > 1) {
+            x.dislikeCount = x.dislikeCount - 1;
+            this.dislikeCount--;
+          }
+        }
+        if(res.statusCode == 0){
+          this.activeStatusTrue = true;
+        } else {
+          this.activeStatusTrue = false;
+        }
+        // if (!(x.likeCount - 1)) {
+        //   x.likeCount = this.dislikeCount - 1;
+        //   this.dislikeCount = 0;
+        // }
+        // if (x.dislikeCount > 0) {
+        //   x.dislikeCount = x.dislikeCount - 1;
+        // }
+      },
+      e => {},
+      () => {}
+    );
+  }
+  dislike(x) {
+    const userData = {
+      reviewid: x.reviewId,
+      userid: this.generalService.getUserId(),
+      liketype: false
+    };
+    this.generalService.postRequest1('postReviewLike', userData).subscribe(
+      res => {
+        if (res.statusCode === 0) {
+          x.dislikeCount = x.dislikeCount + 1;
+          if (x.likeCount > 1) {
+            x.likeCount = x.likeCount - 1;
+          }
+        }
+        // x.dislikeCount = x.dislikeCount + 1;
+        // if (x.likeCount > 0) {
+        //   x.likeCount = x.likeCount - 1;
+        // }
+      //   if(res.statusCode==0)
+      //   {
+      //     x.dislikeCount++;  
+      //   if (x.likeCount === 0) {
+         
+      //     x.likeCount=0;
+      //   }
+      //   else{
+      //     x.likeCount--;
+      //   }
+      // }
+      },
+      e => {},
+      () => {}
+    );
+  }
+
+
+
+  listClick(newValue) {
+    this.selectedItem = newValue;
+  }
+  listClicka(event, newValue) {
+    var data = this.findwishlist(this.tempProdList.productDetailVarietyResponseDtos, newValue.color)
+    var configId = data.ecommConfigId;
+    if (newValue.wishList === true) {
+      newValue.wishList = false;
+      const reqParam = {
+        userId: this.generalService.getUserId(),
+        id: newValue.wishListId
+      };
+      this.generalService
+        .postRequest1('deleteUserWishlistInfo', reqParam)
+        .subscribe(
+        res => {
+          this.getproductsdetail1();
+          this.getWishlist();
+        },
+        e => {},
+        () => {}
+        );
+    } else {
+      newValue.wishList = true;
+      const reqParam = {
+        userId: this.generalService.getUserId(),
+        productId: this.tempProdList.productId,
+        productConfigId: configId
+      };
+      this.generalService.postRequest1('addtowishlist', reqParam).subscribe(
+        res => {
+          this.getWishlist();
+          this.getproductsdetail1();
+        },
+        e => {},
+        () => {}
+      );
+    }
+  }
+  public reviewdesc() {
+    if (this.rate === 0 || this.reviewDesc === '') {
+      this.disableRating = false;
+    } else {
+      this.disableRating = true;
+    }
+  }
+  findwishlist(array, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].color === value) {
+        return array[i];
+      }
+    }
+    return null;
+  }
+  getprodcategory(data) {
+    this.quantity = data.quantity;
+    this.activecircle = data.color;
+    this.tempProdList = this.proddetaillist;
+    this.quantity = data.quantity;
+    
+    this.customerRating = Math.round(data.rating);
+    this.size = data.size;
+    this.oldPrice = data.oldPrice;
+    this.newPrice = data.newPrice;
+    this.occassionName = data.occassionName;
+    this.workName = data.workName;
+    this.materialName = data.materialName;
+
+    // for (
+    //       let i = 0;
+    //       i < this.tempProdList.productDetailVarietyResponseDtos.length;
+    //       i++
+    //     ) {
+    //       if (
+    //         data.color ===
+    //           this.tempProdList.productDetailVarietyResponseDtos[i].color &&
+    //         data.size[0] ===
+    //           this.tempProdList.productDetailVarietyResponseDtos[i].size
+    //       ) {
+    //         this.final = this.tempProdList.productDetailVarietyResponseDtos[i];
+    //       }
+    //     }
+    this.cuurentwishlist = data;    
+    // {
+
+    // }ishlist)
+    // 
+
+    this.checkwishlist = (this.findwishlist(this.tempProdList.productDetailVarietyResponseDtos, data.color));
+    this.cuurentwishlist.wishList = this.checkwishlist.wishList;
+    this.quantity = data.quantity;
+    this.selectedItem = data.size[0];
+    this.currentColor = data.color;
+    this.src = this.cuurentwishlist.smallImage;
+    this.src1 = this.cuurentwishlist.mediumImage;
+    this.src2 = this.cuurentwishlist.thumbnailImage;
+    this.selectedImg = this.proddetaillist.imageURI + this.src;
+  }
+  addtocart() {
+    this.addCardLoad = true;
+    this.tempProdList = this.proddetaillist;
+    const item = this.selectedItem;
+    const color = this.currentColor;
+    let final;
+    for (
+      let i = 0;
+      i < this.tempProdList.productDetailVarietyResponseDtos.length;
+      i++
+    ) {
+      if (
+        color === this.tempProdList.productDetailVarietyResponseDtos[i].color &&
+        (!item ||
+          item === this.tempProdList.productDetailVarietyResponseDtos[i].size)
+      ) {
+        final = this.tempProdList.productDetailVarietyResponseDtos[i];
+      }
+    }
+    this.cuurentwishlist = final;
+    const finalRequest = {
+      userId: this.generalService.getUserId(),
+      ecommProductConfigId: final.ecommConfigId,
+      quantity: 1
+    };
+    this.generalService.postRequest1('addToCart', finalRequest).subscribe(
+      res => {
+        
+        if(res.message == "Item is already in cart"){
+        this.toastr.success("Item Already added")
+        }else{
+          this.toastr.success('Item added to cart');
+        }
+        this.router1.navigate(['product/add-to-cart']);
+      },
+      e => {
+        this.addCardLoad = false;
+        this.toastr.error('Failed to add item to cart');
+      },
+      () => {}
+    );
+  }
+
+  public showProducts(id) {
+    this.ss.changemenuId(id);
+    this.router1.navigate(['/product', id]); 
+}
+
+  buyNow() {
+    this.tempProdList = this.proddetaillist;
+    const item = this.selectedItem;
+    const color = this.currentColor;
+    this.ss.showLoading(true);
+
+    let final;
+    for (
+      let i = 0;
+      i < this.tempProdList.productDetailVarietyResponseDtos.length;
+      i++
+    ) {
+      if (
+        color === this.tempProdList.productDetailVarietyResponseDtos[i].color &&
+        (!item ||
+          item === this.tempProdList.productDetailVarietyResponseDtos[i].size)
+      ) {
+        final = this.tempProdList.productDetailVarietyResponseDtos[i];
+      }
+    }
+    const finalRequest = {
+      userId: this.generalService.getUserId(),
+      ecommProductConfigId: final.ecommConfigId,
+      quantity: this.data
+    };
+    this.generalService.postRequest1('addToCart', finalRequest).subscribe(
+      res => {
+        this.ss.showLoading(false);
+        this.router1.navigate(['product/checkout']);
+      },
+      e => {
+        this.ss.showLoading(false);
+      },
+      () => {}
+    );
+  }
+  addtocart2() {
+    this.router1.navigate(['product/add-to-cart']);
+  }
+
+  getwhilistdata(x) {
+    if (x.wishList === true) {
+      x.wishList = false;
+      const data = {
+        userId: this.generalService.getUserId(),
+        productId: x.productId,
+        productConfigId: x.productConfigId
+      };
+      this.generalService
+        .postRequest1('deleteWishListByProductId', data)
+        .subscribe(
+        res => {
+          this.getWishlist();
+          this.ss.showLoading(false);
+        },
+        e => {},
+        () => {}
+        );
+    } else {
+      x.wishList = true;
+      const data = {
+        userId: this.generalService.getUserId(),
+        productId: x.productId,
+        productConfigId: x.productConfigId
+      };
+      this.generalService
+        .postRequest1('AddToWishListByProductId', data)
+        .subscribe(
+        res => {
+          //this.getproductsdetail1();
+          this.getWishlist();
+          this.ss.showLoading(false);
+        },
+        e => {},
+        () => {}
+        );
+    }
+  }
+
+  getWishlist() {
+    const reqParam = this.generalService.getUserId();
+    this.generalService
+      .getRequest('getUserWishlistInfo?id=' + reqParam)
+      .subscribe(
+      res => {
+        this.ss.changewishlist(res.responseContent);
+      },
+      e => {},
+      () => {}
+      );
+  }
+
+  quantitykey(event: any) {
+    if (event.keyCode == 189 ||
+      event.keyCode == 187 ||
+      event.keyCode == 109 ||
+      event.keyCode == 107) {return false;}
+  }
+
+  getcategoryList() {
+    this.generalService.getRequest('AllMenuItems').subscribe(
+      res => {
+        this.categoryData = res;
+         this.womencategory = this.categoryData[0].subMenu;
+        //  this.mencategory = this.categoryData[2].subMenu;
+        //  this.hometextilecategory = this.categoryData[1].subMenu;
+      },
+      e => {},
+      () => {}
+    );
+}
+
+  breadCrumbDetails() {
+    this.generalService
+      .getRequest1('breadCrumbDetails?id=' + this.mainMenuId)
+      .subscribe(
+      res => {
+        this.breadCrumbDetailsValue = res.responseContent;
+        this.mainCategory = this.breadCrumbDetailsValue.categoryName;
+        
+      },
+      e => {
+        this.ss.showLoading(false);
+      },
+      () => {}
+      );
+  }
+  public breadcrumsClick(id) {
+    this.ss.changemenuId(id);
+    this.router1.navigate(['/product', id]);
+    this.menuId = id;
+    this.getproductsdetail1();
+    this.breadCrumbDetails()
+  }
+}

@@ -1,0 +1,171 @@
+<p>
+  ethuku works!
+</p>
+<!-- <div class="leftcategory-sec left-cate">
+  <h4><i class="fa fa-list-ul m-r-5"></i>Product Category</h4>
+  <accordion class="catclswomen">
+    <div class="inner-cont" *ngFor="let womencat of categoryData; let i = index">
+     <accordion-group heading="{{womencat.name}}" #womencatparent [isOpen]='false' class="fa"
+        [ngClass]="!womencatparent?.isOpen ? 'fa-plus': 'fa-minus'">
+         <div class="innercnt" *ngFor="let wmncat of womencat.subMenu">
+          <accordion-group class="mensubcat" heading="{{wmncat.name}}" (click)="togglewomencat(i)"
+            [ngClass]="{'fa':true,'fa-minus':togglemen[i],'fa-plus':!togglemen[i],'wmncatSubMenu':wmncat.products.length == 1}">
+            <div class="innercnt" *ngFor="let product of wmncat.products">
+              <ul>
+                <li [ngClass]="{'active': selectedItem1 == product}" (click)="listClick($event, product)"><a><span (click)="showProducts(product.id);">{{product.name}}</span></a></li>
+              </ul>
+            </div>
+          </accordion-group>
+          <!-- <ul><li><span (click)="showProducts(wmncat.id);">{{wmncat.name}}</span></li></ul> -->
+        <!-- </div>
+      </accordion-group>
+    </div>
+  </accordion>
+</div> --> 
+
+<!-- <div class="col-md-8">
+<div *ngFor="let item of data;let i = index;">
+  <button class="accordion" (click)="toggleAccordian($event, i)"> {{item.parentName}} </button>
+  <div class="panel" *ngFor="let child of item.childProperties;"  >
+  <p>{{child.propertyName}}</p>
+  <!-- <div class="panel" *ngFor="let child of item.data;" hide="!item.isActive" >
+    <p> {{item.parentName}} </p>
+  </div> -->
+<!-- </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link fa fa-plus" onclick="myFunction(this)" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
+          Collapsible Group Item #1
+        </button>
+      </h2>
+    </div> -->
+
+    <!-- <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+
+
+
+The below give static values works: <br><br>  -->
+
+<!-- <button class="accordion">Section 1</button>
+<div class="panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<button class="accordion">Section 2</button>
+<div class="panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+</div> -->
+<script>
+  // $(document).ready(function(){
+  //   alert("gydd")
+  //     // Add minus icon for collapse element which is open by default
+  //     $(".collapse.in").each(function(){
+  //       $(this).siblings(".panel-heading").find(".fa").addClass("fa-minus").removeClass("fa-plus");
+  //     });
+  //     alert("gydddfsae")
+  //     console.log("ugduyg")
+  //     // Toggle plus minus icon on show hide of collapse element
+  //     $(".collapse").on('show.bs.collapse', function(){
+  //       $(this).parent().find(".fa").removeClass("fa-plus").addClass("fa-minus");
+  //     }).on('hide.bs.collapse', function(){
+  //       $(this).parent().find(".fa").removeClass("fa-minus").addClass("fa-plus");
+  //     });
+  // });
+</script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<div class="col-md-12">
+  <div class="bs-example">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="fa fa-plus"></span> What is HTML?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>HTML stands for HyperText Markup Language. HTML is the standard markup language for describing the structure of web pages. </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="fa fa-plus"></span> What is Bootstrap?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="fa fa-plus"></span> What is CSS?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. <a href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>  -->
+	<p><strong>Note:</strong> Click on the linked heading text to expand or collapse accordion panels.</p>
+</div>
+</div>

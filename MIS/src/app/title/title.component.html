@@ -1,0 +1,46 @@
+<!-- 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+                <div class="form-group">
+                        <label>template name</label>
+                    <input type="text" name="tempname" #tempnameRef="ngModel" pattern="^[a-zA-Z]*$"  placeholder="enter template name" required class="form-control" [(ngModel)]="brand.brandname">
+                    <div *ngIf="tempnameRef.errors && (tempnameRef.dirty || tempnameRef.touched)" class="alert alert-danger">
+    <div [hidden]="!tempnameRef.errors.required">
+                please enter a name 
+                          </div> 
+                         
+                                 </div>
+                    <div class="form-group">
+                        <label>template code</label>
+                    <input type="text" name="tempcode" #tempcodeRef="ngModel" pattern="^[0-9]*$"  placeholder="enter brand one quantity price" required class="form-control" [(ngModel)]="brand.brandname">
+                    <div *ngIf="tempcodeRef.errors && (tempcodeRef.dirty || tempcodeRef.touched)" class="alert alert-danger">
+     <div [hidden]="!tempcodeRef.errors.required">
+                           please enter a number
+                           </div> 
+                          
+    
+                                  </div>
+                    <button type="submit" class="btn btn-success" (click)="shows()">Submit</button>
+                    <button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>
+        </div>
+    </div>
+    
+    </div> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="form-group"> 
+                            <label>template name :</label>
+                            <input type="text" name="tempname"   placeholder="enter template name" required class="form-control">
+                    </div>
+                            <div class="form-group">
+                                    <label>template code:</label> 
+                                    <input type="text" name="tempcode"  placeholder="enter template code" required class="form-control">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success" (click)="shows()">Submit</button>
+                            <button type="button" class="btn btn-danger" (click)="cancel()" style="margin-left: 82px;">Cancel</button>                            
+</div>
+</div>
+    </div>

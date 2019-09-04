@@ -1,0 +1,48 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button> -->
+      <a><img src="assets/logo.png" class="img-rounded" style="height: 100px;"></a>
+      <a class="navbar-brand" href="#"  style="margin-left: 40px;margin-right: 40px">NiKe</a>
+      <a routerLink="/ethuku" routerLinkActive="active">12344</a> 
+       
+      <!-- <a  style="margin-left: 40px;margin-right: 40px">Home </a>
+      <a  style="margin-left: 40px;margin-right: 40px">About</a>
+      <a style="margin-left: 40px;margin-right: 40px">Register</a>
+      <a style="margin-left: 40px;margin-right: 40px">New Login</a>
+      <a routerLink="/view/:id" routerLinkActive="active"></a> -->
+      
+
+      <!-- <a routerLink="/newone" routerLinkActive="active">new</a> -->
+    </div>
+    
+  </div>
+</nav>
+
+<div class="row" style="height: 50px;width:50px ;">
+  <div class="col-md-2">
+
+    <div class="icon-bar">
+        <a routerLink="/item" routerLinkActive="active"><i class="fa fa-home"></i></a> 
+        <a routerLink="/bill" routerLinkActive="active" ><i class="fa fa-black-tie"></i></a> 
+        <a routerLink="/name" routerLinkActive="active"><i class="fa fa-paperclip"></i></a> 
+        <a routerLink="/current" routerLinkActive="active"><i class="fa fa-search"></i></a> 
+        <a routerLink="/demo" routerLinkActive="active"><i class="fa fa-envelope"></i></a> 
+       
+        <a routerLink="/check" routerLinkActive="active"><i class="fa fa-globe"></i></a>
+        <a href="#"><i class="fa fa-trash"></i></a> 
+      </div>
+    <div class="carousel-item" *ngFor="let image of sliderImages let i = index" [ngClass]="{'active' : i == 0}">
+
+        <img class="d-block w-100" [src]="image" alt="First slide">
+      
+      </div>
+
+
+</div>
+</div>
+<router-outlet style="height:100px ;width: 100px;"></router-outlet> 
